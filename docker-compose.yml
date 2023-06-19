@@ -1,0 +1,38 @@
+version: '3.4'
+
+networks:
+  develop:
+    driver: bridge
+
+volumes:
+  dbdata:
+    external: true
+
+services:
+  db:
+    image: fitaplikacja/db:latest
+    container_name: FitAplikacjaDB
+    environment:
+      ACCEPT_EULA: "Y"
+      SA_PASSWORD: "eT98!5rtviVvZ^r*exfs"
+    networks:
+      develop:
+        aliases:
+          - sqlserver 
+    ports:
+      - "1433:1433"
+    volumes:
+      - "dbdata:/var/opt/mssql"
+
+  fitaplikacjaapi:
+    image: fitaplikacja/api:dev
+    container_name: FitAplikacjaAPI
+    networks:
+      - develop
+    environment:
+      FitAplikacjaConnection: "Server=sqlserver;Initial Catalog=FitAplikacja;User ID=sa;Password=eT98!5rtviVvZ^r*exfs;"
+    build:
+      context: .
+      dockerfile: FitAplikacjaAPI/Dockerfile
+    depends_on:
+      - db

@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Google.Apis.Auth" Version="1.50.0" />
+    <PackageReference Include="Microsoft.Extensions.Http" Version="5.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\FitAplikacja.Core\FitAplikacja.Core.csproj" />
+    <ProjectReference Include="..\FitAplikacja.Infrastructure\FitAplikacja.Infrastructure.csproj" />  
+  </ItemGroup>
+
+</Project>
